@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="item"
+            type="com.grepsoft.tabla.MenuItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="16dp"
+        android:background="@color/transparent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@mipmap/ic_media_64"
+            android:src="@drawable/ic_baseline_lock_24" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/icon"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:textAllCaps="true"
+            android:textSize="18sp"
+            android:paddingLeft="16dp"
+            android:textStyle="bold"
+            android:letterSpacing="0.02"
+            android:layout_marginLeft="8dp"
+            tools:text="Media"
+            android:text="@{item.title}" />
+
+        <ImageView
+            android:id="@+id/right_chevron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/ic_baseline_chevron_right_24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

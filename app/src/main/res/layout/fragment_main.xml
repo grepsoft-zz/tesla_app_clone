@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:background="@drawable/gradient_background">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/app_bar_height"
+            android:fitsSystemWindows="true"
+            android:stateListAnimator="@animator/show_toolbar"
+            android:background="@color/transparent"
+            android:animateLayoutChanges="true"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fitsSystemWindows="true"
+                app:contentScrim="@color/transparent"
+                app:statusBarScrim="@color/black"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed"
+                app:toolbarId="@+id/toolbar">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="@android:color/transparent"
+                    app:titleTextColor="?attr/colorOnSurface"
+                    app:layout_collapseMode="pin"
+                    app:contentInsetStartWithNavigation="0dp"
+                    app:navigationIcon="@drawable/ic_settings"
+                    app:menu="@menu/menu_loot_box">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="?attr/actionBarSize"
+                        android:gravity="center"
+                        android:text="@string/app_name"
+                        android:letterSpacing="0.1"
+                        android:textAppearance="?attr/textAppearanceHeadline5" />
+
+                </com.google.android.material.appbar.MaterialToolbar>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/top_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="@dimen/parallax_multiplier"
+                    android:paddingTop="@dimen/header_margin">
+
+                    <LinearLayout
+                        android:id="@+id/battery_range_status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <ImageView
+                            android:id="@+id/battery"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:rotation="90"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_battery_charging_full" />
+
+                        <TextView
+                            android:id="@+id/range"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.02"
+                            android:padding="4dp"
+                            android:text="150"
+                            android:textColor="@color/white"
+                            android:textSize="48sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/range_unit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="-4dp"
+                            android:letterSpacing="0.1"
+                            android:paddingTop="18dp"
+                            android:text="km"
+                            android:textAlignment="viewEnd"
+                            android:textColor="@color/white"
+                            android:textSize="18sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/status"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:letterSpacing="0.1"
+                        android:text="Parked"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/battery_range_status" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/vehicle_container"
+            android:animateLayoutChanges="true"
+            android:background="@drawable/bg_transition"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/tesla"
+                android:layout_width="match_parent"
+                android:layout_height="264dp"
+                android:layout_marginTop="140dp"
+                android:src="@drawable/tesla_model_s" />
+        </FrameLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/menu_scrollview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="72dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/quick_actions_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:gravity="center"
+                    android:padding="8dp">
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/fan"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="16dp"
+                        android:background="@drawable/circle"
+                        android:src="@mipmap/ic_fan_64" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/keys"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="16dp"
+                        android:background="@drawable/circle"
+                        android:src="@mipmap/ic_keys_64" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:id="@+id/lock"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:padding="16dp"
+                        android:background="@drawable/circle"
+                        android:src="@drawable/ic_baseline_lock_24" />
+
+                    <Space
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/main_menu_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/quick_actions_holder"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:padding="16dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/main_menu_list"
+                    android:background="#707070" />
+
+                <TextView
+                    android:id="@+id/bottom_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/main_menu_list"
+                    app:layout_constraintBottom_toTopOf="@+id/my_logo"
+                    android:textColor="@color/gray"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    android:letterSpacing="0.25"
+                    android:textAppearance="?attr/textAppearanceHeadline4"
+                    tools:text="Model S"
+                    android:text="Model S" />
+
+                <ImageView
+                    android:id="@+id/my_logo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/bottom_title"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:paddingBottom="16dp"
+                    android:src="@drawable/logo_98" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
